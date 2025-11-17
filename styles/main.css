@@ -103,9 +103,6 @@ header {
 		& small {
 			margin-left: 0.5em;
 		}
-		&:hover .submenu {
-			display: block;
-		}
 	}
 }
 
@@ -153,7 +150,6 @@ header {
 .menu-btn::before {
 	content: "☰";
 }
-
 
 /* the styles for the main content */
 main {
@@ -219,7 +215,9 @@ footer {
 	font-size: 125%;
 }
 
+/* media query for tablet and desktop */
 @media (min-width: 768px) {
+	/* the styles for the header */
 	header {
 		text-align: left;
 		& img {
@@ -227,21 +225,29 @@ footer {
 		}
 	}
 
+	/* the styles for the main content */
 	main {
 		flex-direction: row;
 	}
 
+	/* the styles for the section */
 	section {
 		flex-basis: 75%;
 		border: none;
 	}
 
+	/* the styles for the aside */
 	aside {
 		flex-basis: 25%;
 	}
 }
 
+/* media query for navigation menu */
 @media (min-width: 600px) {
+	#menu-toggle:checked ~ .menu {
+		display: flex;
+	}
+
 	.menu {
 		display: flex;
 		position: relative;
@@ -255,9 +261,6 @@ footer {
 			& small {
 				margin-left: 0.5em;
 			}
-			&:hover .submenu {
-				display: block;
-			}
 		}
 	}
 
@@ -270,15 +273,21 @@ footer {
 	}
 
 	.submenu {
+		position: absolute;
 		left: 0;
-		right: 0;
-		top: auto;
+		top: 100%;
+		width: max-content;
+		min-width: 100%;
 		background-color: var(--accent-color);
 		color: var(--light-menu-color);
-		display: none;
+		display: none !important;
 		& > li a::after {
 			content: " ▼";
 		}
+	}
+
+	.menu > li:has(.submenu):hover .submenu {
+		display: block !important;
 	}
 
 	.menu > li:first-child a {
